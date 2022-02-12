@@ -1,0 +1,26 @@
+{
+  "name": "broadlink-dna-jssdk",
+  "version": "1.0.0",
+  "email": "745466269@qq.com",
+  "description": "broadlink dna platform jssdk",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "files": [
+    "lib/"
+  ],
+  "scripts": {
+    "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "prepublishOnly": "npm run tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "jiang*3",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^4.5.5"
+  },
+  "dependencies": {
+    "ismobilejs": "^1.1.1",
+    "moment": "^2.29.1"
+  }
+}
