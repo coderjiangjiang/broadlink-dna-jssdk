@@ -14,7 +14,16 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "jiang*3",
+  "homepage": "https://github.com/coderjiangjiang",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coderjiangjiang/broadlink-dna-jssdk.git"
+  },
+  "author": {
+    "name": "jiang*3",
+    "url": "https://github.com/coderjiangjiang",
+    "email": "745466269@qq.com"
+  },
   "license": "ISC",
   "devDependencies": {
     "typescript": "^4.5.5"
