@@ -1,7 +1,7 @@
 import { dnaControl, deviceInfoPromise } from './call-native.js';
 import { split, combine, isFunction } from './utils.js';
 import moment, { Moment, Duration } from 'moment';
-import { CmdOriginType, Command } from './types.js'
+import { CmdOriginType, Command, QueryList } from './types.js'
 /*
         新版定时API
 
@@ -337,16 +337,16 @@ const call = async <T>(request: T) => {
  * array  只有Timer实例列表
  * */
 interface Rqs { timerlist: Timer[], did?: string, act?: number };
-const add = function (...tasks: Timer[] | any[]) {
+const add = function (...tasks: Timer[] | [Rqs]) {
   let rqs: Rqs = { timerlist: [] };
 
-  if (tasks.length === 1 && tasks[0].timerlist) {
+  if (tasks.length === 1 && (tasks[0] as Rqs).timerlist) {
     //传入的参数是固件需要的完成数据
-    let { did, timerlist } = tasks[0];
+    let { did, timerlist } = tasks[0] as Rqs;
     rqs = { did, timerlist };
   } else {
     //传入的参数是定时列表
-    rqs = { timerlist: tasks };
+    rqs = { timerlist: tasks as Timer[] };
   }
   //默认为添加操作
   rqs.act = ACT_ADD;
@@ -367,7 +367,7 @@ const list = async function ({
   count = 10,
   index = 0,
   did,
-}: any = {}) {
+}: QueryList = {} as QueryList) {
   const resp = await call({
     did,
     act: ACT_LIST,
@@ -384,15 +384,15 @@ const list = async function ({
  * object 即是<DNA协议规范3.1.53>中定义的数据结构，但timerlist中可以为Timer实例也以为plain object
  * array  只有定时列表，可以为Timer实例也以为plain object
  * */
-const del = function (...tasks: Timer[] | any[]) {
-  let rqs:Rqs;
+const del = function (...tasks: Timer[] | [Rqs]) {
+  let rqs: Rqs;
 
-  if (tasks.length === 1 && tasks[0].timerlist) {
-    let { did, timerlist } = tasks[0];
+  if (tasks.length === 1 && (tasks[0] as Rqs).timerlist) {
+    let { did, timerlist } = tasks[0] as Rqs;
     rqs = { did, timerlist };
   } else {
     //传入的参数是定时列表
-    rqs = { timerlist: tasks };
+    rqs = { timerlist: tasks as Timer[] };
   }
   rqs.act = ACT_DELETE;
   (rqs.timerlist as any) = rqs.timerlist.map((t) => {
@@ -403,11 +403,11 @@ const del = function (...tasks: Timer[] | any[]) {
   return call(rqs);
 };
 
-const sunSetting = function (setting:any) {
+const sunSetting = function (setting: any) {
   return call({ ...setting, act: ACT_SUN_SETTING });
 };
 
-const getLimitation = function ({ type }:any = {}) {
+const getLimitation = function ({ type }: any = {}) {
   return call({ type, act: ACT_LIMITATION });
 };
 
