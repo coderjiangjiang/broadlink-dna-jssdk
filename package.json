@@ -1,6 +1,6 @@
 {
   "name": "broadlink-dna-jssdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "email": "745466269@qq.com",
   "description": "broadlink dna platform jssdk",
   "main": "./lib/cjs/index.js",
