@@ -1,4 +1,4 @@
-import { Timer } from "./taskV2.js";
+import { Timer, Rqs } from "./taskV2.js";
 import { ReadyType, Command, CmdKeyTypes } from './types.js';
 declare const adapter: {
     platform: string;
@@ -14,9 +14,9 @@ declare const adapter: {
     getDeviceStatus: (params: CmdKeyTypes) => any;
     platformSDK: {
         taskV2: {
-            add: (...tasks: any[] | Timer[]) => Promise<any>;
-            list: ({ type, count, index, did, }?: any) => Promise<any>;
-            del: (...tasks: any[] | Timer[]) => Promise<any>;
+            add: (...tasks: Timer[] | [Rqs]) => Promise<any>;
+            list: ({ type, count, index, did, }?: import("./types.js").QueryList) => Promise<any>;
+            del: (...tasks: Timer[] | [Rqs]) => Promise<any>;
             sunSetting: (setting: any) => Promise<any>;
             getLimitation: ({ type }?: any) => Promise<any>;
             call: <T>(request: T) => Promise<any>;

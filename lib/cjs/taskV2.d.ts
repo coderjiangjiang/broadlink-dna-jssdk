@@ -1,4 +1,5 @@
 import { Moment, Duration } from 'moment';
+import { QueryList } from './types.js';
 declare class Time {
     sun: string;
     duration: Duration;
@@ -30,10 +31,15 @@ export declare class Timer {
     clone(): any;
     toOriginal(): {} & this;
 }
+export interface Rqs {
+    timerlist: Timer[];
+    did?: string;
+    act?: number;
+}
 declare const taskV2: {
-    add: (...tasks: Timer[] | any[]) => Promise<any>;
-    list: ({ type, count, index, did, }?: any) => Promise<any>;
-    del: (...tasks: Timer[] | any[]) => Promise<any>;
+    add: (...tasks: Timer[] | [Rqs]) => Promise<any>;
+    list: ({ type, count, index, did, }?: QueryList) => Promise<any>;
+    del: (...tasks: Timer[] | [Rqs]) => Promise<any>;
     sunSetting: (setting: any) => Promise<any>;
     getLimitation: ({ type }?: any) => Promise<any>;
     call: <T>(request: T) => Promise<any>;

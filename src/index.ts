@@ -43,9 +43,9 @@ const _sync = function <T>(fn: (...args: T[]) => Promise<any>, type: ActTypes, o
 const platformSDK = adapter.platformSDK;
 if (platform === 'dna') {
     const { taskV2 } = platformSDK;
-    taskV2.add = _sync(taskV2.add, 'timer');
+    taskV2.add = _sync(taskV2.add, 'timer') as (typeof taskV2.add);
     taskV2.list = _sync(taskV2.list, 'timer');
-    taskV2.del = _sync(taskV2.del, 'timer');
+    taskV2.del = _sync(taskV2.del, 'timer') as (typeof taskV2.del);
     taskV2.sunSetting = _sync(taskV2.sunSetting, 'timer');
     taskV2.getLimitation = _sync(taskV2.getLimitation, 'timer');
     taskV2.call = _sync(taskV2.call, 'timer');

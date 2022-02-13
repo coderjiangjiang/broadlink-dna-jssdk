@@ -336,7 +336,7 @@ const call = async <T>(request: T) => {
  * object 即是<DNA协议规范3.1.53>中定义的数据结构，但timerlist中为Timer实例
  * array  只有Timer实例列表
  * */
-interface Rqs { timerlist: Timer[], did?: string, act?: number };
+export interface Rqs { timerlist: Timer[], did?: string, act?: number };
 const add = function (...tasks: Timer[] | [Rqs]) {
   let rqs: Rqs = { timerlist: [] };
 

@@ -1,6 +1,6 @@
 import { callNative, deviceInfoPromise, cordovaReadyOnlinePromise, dnaControl } from "./call-native.js";
 import { split, combine } from "./utils.js";
-import taskV2, { Timer } from "./taskV2.js";
+import taskV2, { Timer,Rqs } from "./taskV2.js";
 import navbar from "./navbar.js";
 import { ReadyType, ActTypes, Command, CmdKeyTypes, CmdValOriginTypes, ControlStatus } from './types.js';
 

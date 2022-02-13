@@ -8,6 +8,12 @@ export interface CmdOriginType {
     params: CmdKeyTypes;
     vals: CmdValOriginTypes;
 }
+export interface QueryList {
+    type: string;
+    count: number;
+    index: number;
+    did: string;
+}
 export declare type ControlStatus = Command | CmdKeyTypes;
 export declare type ActTypes = 'get' | 'set' | 'timer';
 export declare type apiName = '' | string;

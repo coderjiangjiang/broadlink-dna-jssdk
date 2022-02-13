@@ -8,9 +8,9 @@ declare const jssdk: {
     }>;
     platformSDK: {
         taskV2: {
-            add: (...tasks: any[] | import("./taskV2.js").Timer[]) => Promise<any>;
-            list: ({ type, count, index, did, }?: any) => Promise<any>;
-            del: (...tasks: any[] | import("./taskV2.js").Timer[]) => Promise<any>;
+            add: (...tasks: import("./taskV2.js").Timer[] | [import("./taskV2.js").Rqs]) => Promise<any>;
+            list: ({ type, count, index, did, }?: import("./types.js").QueryList) => Promise<any>;
+            del: (...tasks: import("./taskV2.js").Timer[] | [import("./taskV2.js").Rqs]) => Promise<any>;
             sunSetting: (setting: any) => Promise<any>;
             getLimitation: ({ type }?: any) => Promise<any>;
             call: <T>(request: T) => Promise<any>;
