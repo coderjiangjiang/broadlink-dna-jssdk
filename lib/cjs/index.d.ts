@@ -1,6 +1,6 @@
-import { Command, CmdKeyTypes } from './types.js';
+import { Command, CmdKeyTypes, ReadyType } from './types.js';
 declare const jssdk: {
-    ready: () => Promise<void | {
+    ready: (readyType?: ReadyType) => Promise<void | {
         online: string;
         name: string;
         deviceID: string;
