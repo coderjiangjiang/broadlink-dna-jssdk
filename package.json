@@ -13,7 +13,11 @@
     "prepublishOnly": "npm run tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "broadlink",
+    "broadlink jssdk",
+    "broadlink dna jssdk"
+  ],
   "homepage": "https://github.com/coderjiangjiang",
   "repository": {
     "type": "git",

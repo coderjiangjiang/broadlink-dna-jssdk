@@ -1,6 +1,6 @@
 import adapter from './adapter.js';
 import taskQueue from './task-queue.js';
-import { Command, CmdKeyTypes, ActTypes } from './types.js';
+import { Command, CmdKeyTypes, ReadyType, ActTypes } from './types.js';
 
 const platform = adapter.platform;
 
@@ -13,19 +13,19 @@ const _setDeviceStatus = function (status: Command) {
 };
 
 const _getDeviceStatus = function (params: CmdKeyTypes) {
-    return adapter.getDeviceStatus(params).then(function (data:any) {
+    return adapter.getDeviceStatus(params).then(function (data: any) {
         return data;
     })
 };
 
-const ready = function () {
-    return adapter.ready().then(function (data) {
+const ready = function (readyType: ReadyType = 'device') {
+    return adapter.ready(readyType).then(function (data) {
         return data;
     });
 };
 
-const _sync = function <T>(fn: (...args:T[]) => Promise<any>, type: ActTypes, omit = false) {
-    return function (...args:T[]) {
+const _sync = function <T>(fn: (...args: T[]) => Promise<any>, type: ActTypes, omit = false) {
+    return function (...args: T[]) {
         return new Promise(function (resolve, reject) {
             const task = () =>
                 fn.apply(null, args)
@@ -54,7 +54,7 @@ if (platform === 'dna') {
 const jssdk = {
     ready,
     platformSDK,
-    setDeviceStatus: _sync<Command>(_setDeviceStatus, 'set') as ((cmd:Command) => Promise<unknown>),
+    setDeviceStatus: _sync<Command>(_setDeviceStatus, 'set') as ((cmd: Command) => Promise<unknown>),
     getDeviceStatus: _sync<CmdKeyTypes>(_getDeviceStatus, 'get') as (typeof _getDeviceStatus),
     platform
 }
