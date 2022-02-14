@@ -2,6 +2,7 @@ import { Info, ControlRes } from './types.js';
 import isMobile from 'ismobilejs';
 export const isIOS = isMobile(window.navigator).apple.device;
 const BRIDGE = "BLNativeBridge";
+let onlineTag: boolean = false;
 
 const _callNative = function <T>(action: string, params: any[] = [], bridge = BRIDGE): Promise<T> {
     const uuid = Date.now().toString(36);
@@ -52,6 +53,7 @@ const cordovaReadyOnlinePromise: Promise<void> = new Promise(function (resolve, 
 
     document.addEventListener('deviceready', () => {
         console.timeEnd('cordova for online page(not device page)');
+        onlineTag = true;
         resolve();
     }, false);
 
@@ -60,7 +62,12 @@ const cordovaReadyOnlinePromise: Promise<void> = new Promise(function (resolve, 
 
 const deviceInfoPromise = (async function () {
     await _cordovaReadyPromise;
-    const info = await _callNative<Info>('deviceinfo');
+    let info: Info;
+    if (!onlineTag) {
+        info = await _callNative('deviceinfo');
+    } else {
+        return {}
+    }
     const device = {} as Info;
     Object.defineProperty(device, "deviceID", {
         value: info.deviceID || null,
@@ -108,8 +115,16 @@ const dnaControl = async function <T>(ctrlData: T, commandStr = 'dev_ctrl') {
         'sendCount': sendCount  //请求个数
     };
 
-    const device = await deviceInfoPromise;
-    const response = await _callNative<ControlRes>('devicecontrol', [device.deviceID, device.subDeviceID, ctrlData, commandStr, time]);
+    let device, response;
+    if (onlineTag) {
+        response = await _callNative<ControlRes>('devicecontrol', [(ctrlData as any).did || null, null, ctrlData, commandStr, time]);
+    } else {
+        device = await deviceInfoPromise;
+        response = await await _callNative<ControlRes>('devicecontrol', [device.deviceID, device.subDeviceID, ctrlData, commandStr, time]);
+    }
+
+    // const device = await deviceInfoPromise;
+    // const response = await _callNative<ControlRes>('devicecontrol', [device.deviceID, device.subDeviceID, ctrlData, commandStr, time]);
 
     if (response.status === 0) {
         return response;
