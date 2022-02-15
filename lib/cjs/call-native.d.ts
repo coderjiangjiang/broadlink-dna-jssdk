@@ -2,6 +2,11 @@ import { ControlRes } from './types.js';
 export declare const isIOS: boolean;
 declare const cordovaReadyOnlinePromise: Promise<void>;
 declare const deviceInfoPromise: Promise<{
+    online?: undefined;
+    name?: undefined;
+    deviceID?: undefined;
+    subDeviceID?: undefined;
+} | {
     online: string;
     name: string;
     deviceID: string;

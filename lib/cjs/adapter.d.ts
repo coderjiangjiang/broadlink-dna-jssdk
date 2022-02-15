@@ -3,6 +3,11 @@ import { ReadyType, Command, CmdKeyTypes } from './types.js';
 declare const adapter: {
     platform: string;
     ready: (readyType?: ReadyType) => Promise<void> | Promise<{
+        online?: undefined;
+        name?: undefined;
+        deviceID?: undefined;
+        subDeviceID?: undefined;
+    } | {
         online: string;
         name: string;
         deviceID: string;
@@ -43,6 +48,11 @@ declare const adapter: {
         closeWebView: () => Promise<unknown>;
         openDevicePropertyPage: () => Promise<unknown>;
         getDevice: () => Promise<{
+            online?: undefined;
+            name?: undefined;
+            deviceID?: undefined;
+            subDeviceID?: undefined;
+        } | {
             online: string;
             name: string;
             deviceID: string;

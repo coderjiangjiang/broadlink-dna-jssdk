@@ -1,6 +1,11 @@
 import { Command, CmdKeyTypes, ReadyType } from './types.js';
 declare const jssdk: {
     ready: (readyType?: ReadyType) => Promise<void | {
+        online?: undefined;
+        name?: undefined;
+        deviceID?: undefined;
+        subDeviceID?: undefined;
+    } | {
         online: string;
         name: string;
         deviceID: string;
@@ -37,6 +42,11 @@ declare const jssdk: {
         closeWebView: () => Promise<unknown>;
         openDevicePropertyPage: () => Promise<unknown>;
         getDevice: () => Promise<{
+            online?: undefined;
+            name?: undefined;
+            deviceID?: undefined;
+            subDeviceID?: undefined;
+        } | {
             online: string;
             name: string;
             deviceID: string;
