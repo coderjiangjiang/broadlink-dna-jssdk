@@ -1,4 +1,4 @@
-import { callNative, deviceInfoPromise, cordovaReadyOnlinePromise, dnaControl } from "./call-native.js";
+import { callNative, deviceInfoPromise, cordovaReadyOnline, dnaControl } from "./call-native.js";
 import { split, combine } from "./utils.js";
 import taskV2, { Timer,Rqs } from "./taskV2.js";
 import navbar from "./navbar.js";
@@ -68,7 +68,7 @@ const platformSDK = (() => {
     };
 })();
 
-const ready = (readyType: ReadyType = 'device') => readyType === 'online' ? cordovaReadyOnlinePromise : deviceInfoPromise;
+const ready = (readyType: ReadyType = 'device') => readyType === 'online' ? cordovaReadyOnline() : deviceInfoPromise;
 
 const adapter = {
     platform: 'dna',

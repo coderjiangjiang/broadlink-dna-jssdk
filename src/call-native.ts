@@ -44,7 +44,7 @@ const _cordovaReadyPromise = new Promise(function (resolve: (val?: unknown) => v
     }, false);
 });
 
-const cordovaReadyOnlinePromise: Promise<void> = new Promise(function (resolve, reject) {
+const cordovaReadyOnline: ()=>Promise<void> = ()=>new Promise(function (resolve, reject) {
     console.time('cordova for online page(not device page)');
 
     const script = document.createElement('script');
@@ -143,5 +143,5 @@ export {
     callNativeSafe as callNative,
     dnaControl,
     deviceInfoPromise,
-    cordovaReadyOnlinePromise
+    cordovaReadyOnline
 }
