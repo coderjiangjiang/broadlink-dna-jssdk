@@ -1,6 +1,6 @@
 import { ControlRes } from './types.js';
 export declare const isIOS: boolean;
-declare const cordovaReadyOnlinePromise: Promise<void>;
+declare const cordovaReadyOnline: () => Promise<void>;
 declare const deviceInfoPromise: Promise<{
     online?: undefined;
     name?: undefined;
@@ -14,5 +14,5 @@ declare const deviceInfoPromise: Promise<{
 }>;
 declare const callNativeSafe: <T>(action: string, params?: any[], bridge?: string) => Promise<T>;
 declare const dnaControl: <T>(ctrlData: T, commandStr?: string) => Promise<ControlRes>;
-export { callNativeSafe as callNative, dnaControl, deviceInfoPromise, cordovaReadyOnlinePromise };
+export { callNativeSafe as callNative, dnaControl, deviceInfoPromise, cordovaReadyOnline };
 //# sourceMappingURL=call-native.d.ts.map
